@@ -1,0 +1,169 @@
+<%- include('../partials/header') -%>
+
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+
+                <div class="column left-line">
+                    <a href="/question/new" class="uk-button uk-button-secondary">Ask Question</a>
+                    <aside class="menu">
+                        <p class="menu-label">
+                            General
+                        </p>
+                        <ul class="menu-list">
+                            <li><a>Dashboard</a></li>
+                            <li><a>Customers</a></li>
+                        </ul>
+                        <p class="menu-label">
+                            Administration
+                        </p>
+                        <ul class="menu-list">
+                            <li><a>Team Settings</a></li>
+                            <li>
+                                <a class="is-active">Manage Your Team</a>
+                                <ul>
+                                    <li><a>Members</a></li>
+                                    <li><a>Plugins</a></li>
+                                    <li><a>Add a member</a></li>
+                                </ul>
+                            </li>
+                            <li><a>Invitations</a></li>
+                            <li><a>Cloud Storage Environment Settings</a></li>
+                            <li><a>Authentication</a></li>
+                        </ul>
+                        <p class="menu-label">
+                            Transactions
+                        </p>
+                        <ul class="menu-list">
+                            <li><a>Payments</a></li>
+                            <li><a>Transfers</a></li>
+                            <li><a>Balance</a></li>
+                        </ul>
+                    </aside>
+                </div>
+                <div class="column is-three-fifths">
+
+                    <hr style="margin:2px; padding: 5px;">
+                    <strong>Question:</strong><br>
+                    <hr style="margin:0px; padding: 5px;">
+                    <p class="subtitle is-6" style="text-align:justify;">
+                        <%=question.title%>
+                            <%= question.description %>
+                                Lorem ipsum dolor sit amet consectetur adipisicing elit. Corporis voluptatem ut, ullam sequi neque dolore praesentium tempora quasi fugiat, nemo repudiandae. Doloribus, illo veritatis. Maxime tempora at aliquid cumque illo!
+                                <br>
+                                <br>
+                    </p>
+                    <div class="level-left">
+                        <p class=" is-small button is-small" style="margin-right: 20px;"><strong>Asked by</strong>:
+                            <%=question.author.username %>
+                        </p>
+                        <p class=" is-small button is-small" style="margin-right: 20px;"><strong>Language: </strong> English </p>
+                        <p class=" is-small button is-small" style="margin-right: 20px;"> <strong>Date:</strong>
+                            <%= question.createdAt.toDateString() %>
+                        </p>
+                        <p class=" is-small button is-small"> <strong>Views:</strong> 3 </p>
+                    </div>
+                    <hr>
+                    <div class="level-left">
+                        <a class="uk-button uk-button-primary" type="button" <% if(!currentUser){%> 
+                        onclick="UIkit.notification({message: 'Plese Login first'})"
+                        <% } %> href="/question/<%=question._id%>/answer/new" 
+                        >Click Answer</a>
+
+                        <% if(currentUser && question.author.id.equals(currentUser._id)){ %>
+                            <a href="/question/<%= question._id%>/edit" class="level-item button is-info is-small"><span class=" is-small"> <i class="fas fa-edit"></i> Edit</span></a>
+                            <form action="/question/<%=question._id%>?_method=DELETE" method="post">
+                                <button class="level-item button is-danger is-small"><span class=" is-small"><i class="fas fa-trash" aria-hidden="true"></i> Delete</span></button>
+                            </form>
+                            <% } %>
+
+                                <a class="level-item">
+                                    <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                </a>
+                    </div>
+                    <hr>
+                    <% question.answers.forEach((answer)=>{%>
+                        <article class="message is-dark">
+                            <div class="message-body">
+                                <article class="media">
+                                    <figure class="media-left">
+                                        <p class="image is-64x64">
+                                            <img src="/images/profile.png">
+                                        </p>
+                                    </figure>
+                                    <div class="media-content">
+                                        <div class="content">
+                                            <p>
+                                                <strong>John Smith</strong> <small>@<%=answer.author.username %></small> <small><%=answer.createdAt.toDateString() %></small>
+                                                <br>
+                                                <%= answer.text%> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin ornare magna eros, eu pellentesque tortor vestibulum ut. Maecenas non massa sem. Etiam finibus odio quis feugiat facilisis.
+                                            </p>
+                                        </div>
+                                        <nav class="level is-mobile">
+                                            <div class="level-left">
+                                                <p class="level-item">
+                                                    <strong class="is-info">Confirm</strong>
+                                                </p>
+                                                <%  if (currentUser && answer.author.id.equals(currentUser._id)) { %>
+                                                    <a href="/question/<%=question._id%>/answer/<%=answer._id %>/edit" class="level-item button is-small">
+                                                        <i class="fas fa-edit    "></i> Edit
+                                                    </a>
+                                                    <form action="/question/<%=question._id%>/answer/<%=answer._id%>?_method=DELETE" method="post">
+
+                                                        <button class="level-item button is-small">
+                                                        <i class="fas fa-trash"> </i> Delete
+                                                    </button>
+                                                    </form>
+                                                    <% } %>
+                                                        <a class="level-item">
+                                                            <span class="icon is-small"><i class="fas fa-heart"></i></span>
+                                                        </a>
+                                            </div>
+                                        </nav>
+                                    </div>
+                                </article>
+
+                            </div>
+                        </article>
+                        <% }) %>
+                            <div>
+
+                            </div>
+                            <div style="margin-bottom: 200px; ">
+                                <form action="/question/<%=question._id%>/answer" method="post">
+                                    <div class="control ">
+                                        <label class="label ">Answer:</label>
+                                        <textarea id="editor" name="answer[text]" style="min-height: 200px !important; " class="textarea ">
+                                        </textarea>
+                                    </div>
+                                    <script>
+                                        ClassicEditor
+                                            .create(document.querySelector('#editor'))
+                                            .then(editor => {
+                                                console.log(editor);
+                                            })
+                                            .catch(error => {
+                                                console.error(error);
+                                            });
+                                    </script>
+                                    <div class="field is-grouped ">
+                                        <div class="control ">
+                                            <button class="uk-button uk-button-secondary ">Submit Answer!</button>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                </div>
+                <div class="column ">
+                    <a href="/question/new " class="uk-button uk-button-secondary ">Ask Question</a>
+                </div>
+            </div>
+            <!-- <h1 class="title ">
+                Hello World
+            </h1>
+            <p class="subtitle ">
+                My first website with <strong>Bulma</strong>!
+            </p> -->
+        </div>
+    </section>
+    <%- include('../partials/footer') -%>

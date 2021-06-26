@@ -1,0 +1,59 @@
+<%- include('../partials/header') -%>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+
+                <div class="column">
+
+                </div>
+                <div class="column is-three-fifths">
+                    <div>
+                        <strong>Edit Question:</strong>
+                        <hr>
+                    </div>
+                    <form action="/question" method="post">
+                        <!-- <div class="field">
+                            <label class="label">Title:</label>
+                            <div class="control">
+                                <input class="input" type="text" name="title" placeholder="Question Title here">
+                            </div>
+                        </div> -->
+                        <div class=" field ">
+                            <label class="label ">Discription:</label>
+                            <div class="control ">
+                                <textarea id="editor" name="description" class="textarea" placeholder="question here"></textarea>
+                            </div>
+                        </div>
+                        <script>
+                            ClassicEditor
+                                .create(document.querySelector('#editor'))
+                                .then(editor => {
+                                    console.log(editor);
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        </script>
+
+
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Submit Question!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="column ">
+                    <a href="/question/new" class="uk-button uk-button-secondary">Ask Question</a>
+
+                </div>
+            </div>
+            <!-- <h1 class="title ">
+                Hello World
+            </h1>
+            <p class="subtitle ">
+                My first website with <strong>Bulma</strong>!
+            </p> -->
+        </div>
+    </section>
+    <%- include('../partials/footer') -%>

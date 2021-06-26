@@ -1,0 +1,40 @@
+<%- include('../partials/header') -%>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+
+                <div class="column">
+                    side
+                </div>
+                <div class="column is-three-fifths">
+                    <div>
+                        <strong>Edit Answer:</strong>
+                        <hr>
+                    </div>
+                    <form action="/question/<%=question %>/answer/<%=answer._id%>?method=PUT" method="post">
+                        <div class=" field ">
+                            <label class="label ">Answer:</label>
+                            <div class="control ">
+                                <textarea name="answer[text]" class="textarea " placeholder="Textarea "><%= answer.text %></textarea>
+                            </div>
+                        </div>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Update Answer!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="column ">
+                    Ask Question
+                </div>
+            </div>
+            <!-- <h1 class="title ">
+                Hello World
+            </h1>
+            <p class="subtitle ">
+                My first website with <strong>Bulma</strong>!
+            </p> -->
+        </div>
+    </section>
+    <%- include('../partials/footer') -%>

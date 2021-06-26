@@ -1,0 +1,49 @@
+<%- include('../partials/header') -%>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+
+                <div class="column">
+                    side
+                </div>
+                <div class="column is-three-fifths">
+                    <div>
+                        <strong>Answer:</strong>
+                        <hr>
+                    </div>
+                    <form action="/question/<%=question._id%>/answer" method="post">
+
+                        <div class="control ">
+                            <label class="label ">Answer:</label>
+                            <textarea id="editor" name="answer[text]" class="textarea" placeholder="question here"></textarea>
+                        </div>
+                        <script>
+                            ClassicEditor
+                                .create(document.querySelector('#editor'))
+                                .then(editor => {
+                                    console.log(editor);
+                                })
+                                .catch(error => {
+                                    console.error(error);
+                                });
+                        </script>
+                        <div class="field is-grouped">
+                            <div class="control">
+                                <button class="button is-link">Submit Answer!</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="column ">
+                    <a href="/question/new" class="uk-button uk-button-secondary">Ask Question</a>
+                </div>
+            </div>
+            <!-- <h1 class="title ">
+                Hello World
+            </h1>
+            <p class="subtitle ">
+                My first website with <strong>Bulma</strong>!
+            </p> -->
+        </div>
+    </section>
+    <%- include('../partials/footer') -%>

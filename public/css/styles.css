@@ -1,0 +1,40 @@
+/* Stackoverflow preview fix, please ignore */
+
+a {
+    text-decoration: none !important;
+}
+
+.left-line {
+    border-right: 3px solid rgb(180, 185, 248);
+    border-top-right-radius: 30px;
+}
+
+.mystyle {
+    width: 100%;
+    padding: 25px;
+    background-color: coral;
+    color: white;
+    font-size: 25px;
+    box-sizing: border-box;
+}
+
+.footer {
+    border-top: 5px solid #ccc;
+    position: fixed;
+    padding: 20px !important;
+    padding-bottom: 30px !important;
+    margin: 0;
+    left: 0;
+    bottom: 0;
+    width: 100%;
+    height: 20px !important;
+    /* background-color: red; */
+    /* color: white; */
+    text-align: center;
+}
+
+@media screen and (max-width: 450px) {
+    .menu {
+        display: none !important;
+    }
+}
