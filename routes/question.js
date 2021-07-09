@@ -54,16 +54,21 @@ router.get('/new', (req, res) => {
 //@desc         ADD QUESTION TO DATABASE
 // @router      POST /QUESTION
 router.post('/', isLoggedIn, (req, res) => {
+    req.body.user = req.user.id;
+
+    var n = req.body.user;
     // console.log(req.body)
     var description = req.body.description;
     // console.log(req.user)
     var author = {
-        id: req.user.id,
-        username: req.user.username
-    }
-    newQuestion = { description: description, author: author };
-    // console.log(newQuestion)
+            id: req.user.id,
+            username: req.user.username
+        }
+        // console.log()
+    newQuestion = { description: description, author: author, user: n };
+    console.log(newQuestion)
     Question.create(newQuestion, (err, question) => {
+
         if (err) {
             // res.render('404');
         } else {

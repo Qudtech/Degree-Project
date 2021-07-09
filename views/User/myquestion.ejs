@@ -59,23 +59,44 @@
                             </aside>
                         </div>
                         <div class="column is-three-fifths">
+                            List of Question asked by
+                            <%=currentUser.username %>
+                                <% Questions.forEach((Question)=>{%>
+                                    <a>
+                                        <div class="card mb-2" style="border: 1px solid rgb(225, 223, 223);">
+                                            <table class="card-header-title" style="width: 100%;">
+                                                <tr>
+                                                    <td style="padding-right:5px;">
+                                                        <i class="fas fa-question-circle    "></i> </td>
+                                                    <td style="width: 100% auto; background-color: rgb(187, 208, 255); padding:5px 20px 10px 10px; text-align: justify;">
+                                                        <%=Question.description%>
+                                                            Lorem ipsum dolor sit amet consectetur adipisicing elit. Id velit ullam eius magnam non porro minima voluptatibus repellendus? Obcaecati unde quam eveniet. Soluta magnam placeat inventore sed repellendus consequatur quasi!
+                                                    </td>
+                                                    <td style=" text-align: center; width: 150px; background-color: rgb(187, 208, 255); padding:5px 20px 10px 10px;">
+                                                        <%=Question.createdAt.toDateString()%>
+                                                            <br>
+                                                            <a href="/question/<%=Question._id%>" class="button ">Check</a>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </div>
+                                    </a>
+                                    <% }) %>
 
-                            <%=Qestions%>
+                                        <div class="tab ">
 
-                                <div class="tab">
+                                        </div>
 
-                                </div>
-
-                                <!-- < q.forEach((question)=>{%>
+                                        <!-- < q.forEach((question)=>{%>
                                 <a href="/question/<=question._id%>">
-                                    <div class="card">
-                                        <p class="card-header-title" style="font-weight: 500;">
-                                            <=question.description%>
-                                        </p>
-                                    </div>
-                                </a>
-                                <}) %> -->
-                                <!-- ///////////////////loop 2 -->
+                                                            <div class="card">
+                                                                <p class="card-header-title" style="font-weight: 500;">
+                                                                    <=question.description%>
+                                                                </p>
+                                                            </div>
+                                    </a>
+                                    <}) %> -->
+                                        <!-- ///////////////////loop 2 -->
                         </div>
                         <div class="column ">
                             <a href="/question/new" class="uk-button uk-button-secondary">Ask Question</a>

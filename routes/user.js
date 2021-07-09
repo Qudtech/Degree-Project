@@ -19,15 +19,14 @@ router.get('/dashboard', isLoggedIn, async(req, res) => {
     } catch (error) {}
 });
 
-router.get('/myquestion', isLoggedIn, (req, res) => {
+router.get('/myquestion', isLoggedIn, async(req, res) => {
 
-    var author = { 'author.id': req.user.id };
-    const Qestions = Question.find(author).lean();
-    console.log(Qestions)
+    const Questions = await Question.find({ user: req.user.id }).lean()
+    console.log(Questions)
 
     res.render('user/myquestion', {
         name: req.user.username,
-        Qestions
+        Questions
     })
 })
 

@@ -27,11 +27,6 @@ router.post('/', async(req, res) => {
         if (err) {
             console.log(err)
         }
-
-        function thank() {
-            alert('Thanks')
-        }
-
         res.redirect('/blog/new')
     })
     console.log(blog)
@@ -43,6 +38,43 @@ router.get('/', async(req, res) => {
         .limit(3)
     console.log(Result)
     res.render('Blog/index', { Result });
+});
+
+router.get('/nacomyo', async(req, res) => {
+    var Result = await Post.find({ "status": "NACOMYO" })
+        .sort({ createAt: 'desc' })
+        .lean()
+        .limit(3)
+    console.log(Result)
+    res.render('Blog/nacomyo', { Result });
+});
+
+
+router.get('/education', async(req, res) => {
+    var Result = await Post.find({ "status": "EDUCATION" })
+        .sort({ createAt: 'desc' })
+        .lean()
+        .limit(5)
+    console.log(Result)
+    res.render('Blog/education', { Result });
+});
+
+router.get('/fatwah', async(req, res) => {
+    var Result = await Post.find({ "status": "FATWAH" })
+        .sort({ createAt: 'desc' })
+        .lean()
+        .limit(5)
+    console.log(Result)
+    res.render('Blog/fatwah', { Result });
+});
+
+router.get('/alyekeen', async(req, res) => {
+    var Result = await Post.find({ "status": "AL-YEKEEN" })
+        .sort({ createAt: 'desc' })
+        .lean()
+        .limit(5)
+    console.log(Result);
+    res.render('Blog/alyekeen', { Result });
 });
 
 
@@ -68,19 +100,19 @@ router.post('/:id/comment', isLoggedIn, async(req, res) => {
             console.log(err)
         } else {
             console.log(req.body.comment);
-            // Comment.create(req.body.comment, (err, comment) => {
-            //     if (err) {
-            //         console.log(err)
-            //     } else {
-            //         comment.author.id = req.user._id;
-            //         comment.author.username = req.user.username;
-            //         console.log(comment);
-            //         comment.save();
-            //         postId.comments.push(comment);
-            //         postId.save();
-            //         res.redirect(`/blog/${req.params.id}`)
-            //     }
-            // })
+            Comment.create(req.body.comment, (err, comment) => {
+                if (err) {
+                    console.log(err)
+                } else {
+                    comment.author.id = req.user._id;
+                    comment.author.username = req.user.username;
+                    console.log(comment);
+                    comment.save();
+                    postId.comments.push(comment);
+                    postId.save();
+                    res.redirect(`/blog/${req.params.id}`)
+                }
+            })
         }
 
     })

@@ -61,6 +61,24 @@ a {
     background-color: black;
 }
 
+.list-news {
+    /* display: flex; */
+    background-color: black;
+    margin-top: -30px;
+    text-align: center;
+    color: white;
+    margin-bottom: 20px;
+}
+
+.list-news a {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.list-news a:hover {
+    color: blanchedalmond;
+}
+
 @media screen and (max-width: 450px) {
     .menu {
         display: none !important;
