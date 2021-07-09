@@ -39,13 +39,12 @@ module.exports = {
         if (req.isAuthenticated()) {
             Question.findById(req.params.id, (err, foundQuestion) => {
                 if (err) {
-
+                    console.log(err)
                 } else {
                     if (foundQuestion.author.id.equals(req.user._id)) {
                         return next()
                     } else {
                         req.flash("error", "Please login!, Only login user can do this")
-
                         res.redirect('back')
                     }
                 }
@@ -53,6 +52,37 @@ module.exports = {
         } else {
             req.flash("error", "Please login!, Only login user can do this")
             res.redirect('back')
+        }
+    },
+    paginationResult: function(model) {
+        return async(req, res, next) => {
+            const page = parseInt(req.query.page);
+            const limit = parseInt(req.query.limit);
+
+            const startIndex = (page - 1) * limit;
+            const endIndex = page * limit;
+            const results = {}
+
+            if (startIndex > 0) {
+                results.next = {
+                    page: page + 1,
+                    limit: limit
+                }
+            }
+
+            if (endIndex < await model.countDocuments().exec()) {
+                results.previous = {
+                    page: page - 1,
+                    limit: limit
+                }
+            }
+            try {
+                results.results = await model.find({}).limit(limit).skip(startIndex).exec()
+                res.paginationResult = results
+                next()
+            } catch (e) {
+                res.status(500).json({ message: e.message })
+            }
         }
     },
     truncate: function(str, len) {

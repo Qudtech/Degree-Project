@@ -1,10 +1,8 @@
 const mongoose = require('mongoose');
 
 
-const questionSchema = mongoose.Schema({
-    description: {
-        type: String
-    },
+const commentSchema = new mongoose.Schema({
+    comment: String,
     author: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
@@ -12,15 +10,10 @@ const questionSchema = mongoose.Schema({
         },
         username: String
     },
-    answers: [{
-        type: mongoose.Schema.Types.ObjectId,
-        ref: "Answer"
-    }],
     createdAt: {
         type: Date,
         default: Date.now
     }
-})
+});
 
-
-module.exports = mongoose.model('Question', questionSchema)
+module.exports = mongoose.model("comment", commentSchema);

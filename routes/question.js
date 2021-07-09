@@ -3,6 +3,7 @@ const router = express.Router({ mergeParams: true });
 const Question = require('../moduls/Question')
 const { formatDate, stripTags, checkAnswerOwnership, checkQestionOwnership, isLoggedIn } = require('../midleware/helper')
 const Answer = require('../moduls/Answer');
+const { post } = require('./answer');
 
 
 //@desc         show all question 
@@ -11,6 +12,7 @@ router.get('/', async(req, res) => {
     // var numberQestion = await Question.estimatedDocumentCount({}, (err, item) => { return item });
     const questionTotal = await Question.estimatedDocumentCount();
     const answerTotal = await Answer.estimatedDocumentCount();
+
 
     Question.find({}, async(err, allquestion) => {
         try {
@@ -27,11 +29,17 @@ router.get('/unanswers', async(req, res) => {
     const questionTotal = await Question.estimatedDocumentCount();
     const answerTotal = await Answer.estimatedDocumentCount();
 
-    Question.find({}, async(err, allquestion) => {
-        try {
-            res.render('Question/unanswered', { Questions: allquestion, questionTotal: questionTotal, answerTotal: answerTotal });
-        } catch (error) {}
-    })
+    var Questions = await Question.find({})
+        .sort({ createAt: 'desc' })
+        .lean();
+    try {
+        res.render('Question/unanswered', {
+            Questions,
+            questionTotal: questionTotal,
+            answerTotal: answerTotal
+        });
+    } catch (error) {}
+
 });
 
 
@@ -113,6 +121,7 @@ router.delete('/:id', checkQestionOwnership, (req, res) => {
     Question.findOneAndRemove(req.params.id, (err) => {
         if (err) {
             //error
+            console.log(err)
             res.redirect('/question');
         } else {
             res.redirect('/question');

@@ -1,19 +1,67 @@
 <%- include('../partials/header') -%>
     <section class="section">
         <div class="container">
+            <div style="background-color: rgb(0, 0, 0); padding-bottom: 1px; border-radius: 0px 0px 20px 20px; margin-bottom: 20px; margin-top: -60px;">
+                <h4 style="text-align: center; font-weight: 500; color: white;">
+                    Blog
+                </h4>
+            </div>
             <div class="columns">
-                <div class="column is-full">
-                    <h1 class="title">Medium section</h1>
+                <div class="column left">
+
+                    <a href="/blog/new">create</a>
+                    <!-- <h1 class="title">Medium section</h1>
                     <h2 class="subtitle">
                         A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
-                    </h2>
+                    </h2> -->
                 </div>
-            </div>
-            <div class="columns">
-                <div class="uk-column-1-2 uk-column-divider">
+                <div class="column is-three-fifths">
+
+                    <% Result.forEach((post)=>{ %>
+                        <article class="message" style="margin-bottom: border: solid 1px rgba(240, 240, 240, 0.836);">
+                            <div class="message-body" style="border-left: none !important;">
+                                <article class="media">
+                                    <!-- <figure class="media-left">
+                                    <p class="image" style="width: 150px !important;">
+                                        <img src="/images/profile.png">
+                                    </p>
+                                </figure> -->
+                                    <div class="media-content">
+                                        <div class="content" style="text-align: justify;">
+                                            <a class=" " style="pointer-events: none;">
+                                                <span class=" is-small"><i class="fas fa-clock" style="margin-right: 5px;"></i><%=post.createAt.toDateString() %> </span>
+                                            </a><br>
+                                            <a href="Blog/<%=post._id%>">
+                                                <strong style="color: #6495ED; font-weight: 500;"> <%=post.title.substring(0,100)%>...</strong>
+                                                <br>
+                                                <%=post.body.substring(0,150)%>...
+                                            </a>
+                                        </div>
+                                        <nav class="level is-mobile">
+                                            <div class="level-left">
+                                                <a href="Blog/<%=post._id%>" class="level-item read-more" style="background-color: cadetblue !important;">
+                                                    <span class="button is-small"> READ MORE.. </span>
+                                                </a>
+
+                                                <a href="/question/" class=" level-item " style="pointer-events: none;">
+                                                    <span class="button is-small ">Comment (3)</span>
+                                                </a>
+
+                                                <a class="level-item " style="pointer-events: none;">
+                                                    <span class="button is-small">Views (3)</span>
+                                                </a>
+
+                                            </div>
+                                        </nav>
+                                    </div>
+                                </article>
+
+                            </div>
+                        </article>
+                        <% }) %>
+                </div>
+                <div class="column left">
 
                 </div>
-            </div>
-        </div>
     </section>
-    <%- include('../partials/footer') -%>
+    <%- include('../partials/footer1') -%>

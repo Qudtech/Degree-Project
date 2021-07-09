@@ -1,0 +1,87 @@
+<%- include('../partials/header') -%>
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column left">
+                    <!-- <h1 class="title">Medium section</h1>
+                    <h2 class="subtitle">
+                        A simple container to divide your page into <strong>sections</strong>, like the one you're currently reading.
+                    </h2> -->
+                </div>
+                <div class="column is-three-fifths">
+                    <div class="tile is-parent">
+                        <div class="tile is-child">
+                            <div style="border-bottom: 3px solid rgb(92, 143, 255);">
+                                <strong>
+                                   <%= post.title %> Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora facere delectus, optio magnam necessitatibus recusandae accusantium labore quae numquam fugit sed vel odio impedit sapiente unde doloribus sit nam consequuntur.
+                                </strong>
+
+                                <p style="text-align: justify;">
+                                    <%= post.body %>
+                                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, dolorum voluptatibus? Consequuntur, blanditiis obcaecati deserunt enim veniam excepturi expedita aperiam laborum, ipsam quam, temporibus ad vel adipisci sed quibusdam suscipit! Lorem
+                                        ipsum dolor sit amet consectetur adipisicing elit. Temporibus, dolorum voluptatibus? Consequuntur, blanditiis obcaecati deserunt enim veniam excepturi expedita aperiam laborum, ipsam quam, temporibus ad vel adipisci
+                                        sed quibusdam suscipit! Lorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, dolorum voluptatibus? Consequuntur, blanditiis obcaecati deserunt enim veniam excepturi expedita aperiam laborum, ipsam
+                                        quam, temporibus ad vel adipisci sed quibusdam suscipit! vLorem ipsum dolor sit amet consectetur adipisicing elit. Temporibus, dolorum voluptatibus? Consequuntur, blanditiis obcaecati deserunt enim veniam excepturi
+                                        expedita aperiam laborum, ipsam quam, temporibus ad vel adipisci sed quibusdam suscipit!
+                                </p>
+                            </div>
+                            <p>
+                                Comments
+                                <% post.comments.forEach((comment) => {%>
+
+
+                                    <article class="media p-2" style="background-color: rgb(245, 245, 245);">
+                                        <figure class="media-left">
+                                            <p class="image is-64x64">
+                                                <img src="/images/profile.png " style="border-radius: 100%;">
+                                            </p>
+                                        </figure>
+                                        <div class="media-content ">
+                                            <div class="content ">
+                                                <p>
+                                                    <strong><%=comment.author.username%></strong>
+                                                    <br>
+                                                    <%=comment.comment %><br>
+                                                        <small style="border-top: 1px solid #ccc;"><a>Like</a> · <a>Reply</a> <%=comment.createdAt.toDateString()%></small>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </article>
+                                    <% }); %>
+                                        <article class="media ">
+                                            <figure class="media-left ">
+                                                <p class="image is-64x64 ">
+                                                    <img src="/images/profile.png " style="border-radius: 100%;">
+                                                </p>
+                                            </figure>
+
+                                            <div class="media-content ">
+                                                <div class="content ">
+                                                    <% if(!currentUser){ %>
+                                                        <% }else{ %>
+                                                            <strong>@ <%=currentUser.username%> </strong>
+                                                            <% } %>
+                                                                <form action="/blog/<%=post._id%>/comment" method="POST">
+                                                                    <div class="field">
+                                                                        <p class="control">
+                                                                            <textarea class="textarea" name="comment[comment]" placeholder="Add a comment..."></textarea>
+                                                                        </p>
+                                                                    </div>
+                                                                    <div class="field">
+                                                                        <p class="control">
+                                                                            <button class="button">Post comment</button>
+                                                                        </p>
+                                                                    </div>
+                                                                </form>
+                                                </div>
+                                            </div>
+                                        </article>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="column left">
+
+                </div>
+    </section>
+    <%- include('../partials/footer1') -%>

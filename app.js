@@ -51,11 +51,12 @@ app.use((req, res, next) => {
 // ROUNTER
 // ========================
 app.use('/', require('./routes/index'))
+app.use('/', require('./routes/user'))
 app.use('/question', require('./routes/question'))
 app.use('/question/:id/answer', require('./routes/answer'))
 app.use('/', require('./routes/auth'))
 app.use('/', require('./routes/admin'))
-app.use('/', require('./routes/blog'))
+app.use('/blog', require('./routes/blog'))
 
 
 const PORT = process.env.PORT || 8000

@@ -34,7 +34,7 @@ function seedDB() {
         //                 Answer.create({
         //                     text: "A. My Rubb is Allah Who has created me and all that exists. He nourishes me and all creatures by His Bounties.",
         //                     author: "Qudus"
-        //                 }, (err, comment) => {
+        //                 }, (err, comment) => 
         //                     question.answers.push(comment)
         //                     question.save()
         //                     console.log('comment save')

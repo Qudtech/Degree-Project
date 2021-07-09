@@ -1,0 +1,92 @@
+<%- include('../partials/header') -%>
+    <div class="container" style="padding: 10px;">
+        <div class="uk-margin">
+            <form class="uk-search uk-search-default" style="width: 100%;">
+                <span class="uk-search-icon-flip" uk-search-icon></span>
+                <input class="uk-search-input" type="search" placeholder="Search">
+            </form>
+            <!-- </div>
+        <div class="field mt-4 ">
+            <p class="control has-icons-left has-icons-right ">
+                <input class="input is-small" name="Search" type="Search" placeholder="Seacrh here!">
+                <span class="icon is-small is-left "> <i class="fa fa-search" aria-hidden="true"></i></span>
+                </span>
+            </p>
+        </div> -->
+        </div>
+        <%=name %>
+            <section class="section mb-6">
+                <div class="container">
+                    <div class="columns">
+
+                        <div class="column left-line">
+                            <aside class="menu  ">
+                                <p class="menu-label">
+                                    General
+                                </p>
+                                <ul class="menu-list">
+                                    <% if(currentUser) {%>
+                                        <li><a href="/dashboard">Dashboard</a></li>
+                                        <li><a href="/myquestion">My Questions</a></li>
+                                        <% } %>
+                                            <li><a>Ask question</a></li>
+                                </ul>
+                                <!-- <p class="menu-label">
+                            Administration
+                        </p> -->
+                                <!-- <ul class="menu-list">
+                            <li><a>Team Settings</a></li>
+                            <li>
+                                <a class="is-active">Manage Your Team</a>
+                                <ul>
+                                    <li><a>Members</a></li>
+                                    <li><a>Plugins</a></li>
+                                    <li><a>Add a member</a></li>
+                                </ul>
+                            </li>
+                            <li><a>Invitations</a></li>
+                            <li><a>Cloud Storage Environment Settings</a></li>
+                            <li><a>Authentication</a></li>
+                        </ul> -->
+                                <!-- <p class="menu-label">
+                            Transactions
+                        </p>
+                        <ul class="menu-list">
+                            <li><a>Payments</a></li>
+                            <li><a>Transfers</a></li>
+                            <li><a>Balance</a></li>
+                        </ul> -->
+                            </aside>
+                        </div>
+                        <div class="column is-three-fifths">
+
+                            <%=Qestions%>
+
+                                <div class="tab">
+
+                                </div>
+
+                                <!-- < q.forEach((question)=>{%>
+                                <a href="/question/<=question._id%>">
+                                    <div class="card">
+                                        <p class="card-header-title" style="font-weight: 500;">
+                                            <=question.description%>
+                                        </p>
+                                    </div>
+                                </a>
+                                <}) %> -->
+                                <!-- ///////////////////loop 2 -->
+                        </div>
+                        <div class="column ">
+                            <a href="/question/new" class="uk-button uk-button-secondary">Ask Question</a>
+                        </div>
+                    </div>
+                    <!-- <h1 class="title ">
+                Hello World
+            </h1>
+            <p class="subtitle ">
+                My first website with <strong>Bulma</strong>!
+            </p> -->
+            </section>
+            </div>
+            <%- include('../partials/footer1') -%>

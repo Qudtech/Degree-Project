@@ -7,7 +7,7 @@ const Question = require('../moduls/Question');
 
 
 
-router.get('/dashboard', async(req, res) => {
+router.get('/dashboard', isAdmin, async(req, res) => {
     try {
 
         const result = await Question.find({})
@@ -22,7 +22,7 @@ router.get('/dashboard', async(req, res) => {
 
 function isAdmin(req, res, next) {
     if (req.isAuthenticated()) {
-        if (currentUser && currentUser.isAdmin) {
+        if (req.user && req.user.isAdmin) {
             next()
         } else {
             res.redirect('back');
